@@ -1,5 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
+
+def index(request):
+    return render(request, 'video/index.html')
+
 from .models import VideoContent, VideoTagList, VideoTagName
 
 def index(request, page=0):
