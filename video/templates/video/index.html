@@ -9,13 +9,13 @@
   <h4>関連タグ</h4>
   <ul class="taglist">
   {% for item in tags %}
-    <li><a href="{% comment %}{% url 'video:tag' item.name %}{% endcomment %}">{{ item.name }}</a> ({{ item.count }})</li>
+    <li><a href={% url 'video:tag' item.name %}">{{ item.name }}</a> ({{ item.count }})</li>
   {% endfor %}
   </ul>
 </div>
 
 <div class="center">
-  <form action="{% comment %}{% url 'video:search' %}{% endcomment %}" method="post">
+  <form action="{% url 'video:search' %}" method="post">
     {% csrf_token %}
     <input name="search_text" type="text" size="50" value="">
     <input type="submit" value="検索">
@@ -23,16 +23,16 @@
   <br>
   {% for item in contents %}
     <div class="content">
-      <a href="{% comment %}{% url 'video:watch' item.id %}{% endcomment %}"><img src="/media/video/{{ item.id }}/thumb.jpg"></a>
+      <a href="{% url 'video:watch' item.id %}"><img src="/media/video/{{ item.id }}/thumb.jpg"></a>
       <div class="detail">
-        <a href="{% comment %}{% url 'video:watch' item.id %}{% endcomment %}"><h4>{{ item.title }}</h4></a>
+        <a href="{% url 'video:watch' item.id %}"><h4>{{ item.title }}</h4></a>
         <br>
         {% for tag in item.tags %}
-          <a href="{% comment %}{% url 'video:tag' tag.tag.name %}{% endcomment %}">{{ tag.tag.name }}</a>
+          <a href="{% url 'video:tag' tag.tag.name %}">{{ tag.tag.name }}</a>
         {% endfor %}
         <br>
         <br>
-        <a href="{% comment %}{% url 'video:edit' item.id %}{% endcomment %}">Edit</a>
+        <a href="{% url 'video:edit' item.id %}">Edit</a>
       </div>
     </div>
     {% endfor %}

@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 
-def index(request):
-    return render(request, 'video/index.html')
+def index(request, page=0):
+    max_page = VideoContent.objects.count() // 10
+    return construct_page(request, VideoTagList.objects.values('content_id'), VideoContent.objects.order_by('-upload_date')[page*10:(page+1)*10].values(), page, max_page, 'video:index')
 
 from django.db.models import Count
 
